@@ -13,13 +13,18 @@ function svgGenerator(name, { shape, rounded, ...params }) {
 
   const { size, viewBox, background, color, bold, fontSize } = svgProperty(params);
   const colors = colorGenerator(initialName);
+
+  const validShape = Array.isArray(shape) ? shape[shape.length - 1] : shape;
+
+  const validRounded = Array.isArray(rounded) ? rounded[rounded.length - 1] : rounded;
+
   return `
   <svg height="${size}" width="${size}" xmlns="http://www.w3.org/2000/svg" viewBox="${viewBox}">
       ${
-        shape === 'square'
-          ? `<rect width="${size}" height="${size}" x="0" y="0" rx="${rounded ?? 0.1 * size}" ry="${
-              rounded ?? 0.1 * size
-            }" fill="${background || colors.background}" />`
+        validShape === 'square'
+          ? `<rect width="${size}" height="${size}" x="0" y="0" rx="${
+              validRounded ?? 0.1 * size
+            }" ry="${validRounded ?? 0.1 * size}" fill="${background || colors.background}" />`
           : `<circle r="${size / 2}" cx="${size / 2}" cy="${size / 2}" fill="${
               background || colors.background
             }" />`
@@ -31,12 +36,12 @@ function svgGenerator(name, { shape, rounded, ...params }) {
         style="
           color: ${color || colors.text};
           line-height: 1;
-          alignment-baseline: middle;
-          text-anchor: middle;
-          font-size: ${fontSize};
-          font-weight: ${bold};
           font-family: inherit;
         "
+        alignment-baseline="middle"
+        text-anchor="middle"
+        font-size="${fontSize}"
+        font-weight="${bold}"
         dy=".1em"
         dominant-baseline="middle"
       >

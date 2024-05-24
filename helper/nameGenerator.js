@@ -4,16 +4,18 @@
  * @returns string
  */
 function nameGenerator(name) {
-  if (!name) return '~';
+  const validName = Array.isArray(name) ? name[name.length - 1] : name;
+  if (!validName) return '~';
 
-  const [firstName, lastName] = name
+  const [firstName, secondName] = validName
     ?.trim?.()
     ?.split?.(' ')
     ?.filter?.((el) => !!el)
     ?.map?.((el) => el.trim());
 
   const firstInitial = firstName?.[0];
-  const lastInitial = lastName?.[0];
+  let lastInitial = secondName?.[0];
+  if (!lastInitial) lastInitial = firstName?.[1];
   return `${firstInitial || ''}${lastInitial || ''}`;
 }
 
