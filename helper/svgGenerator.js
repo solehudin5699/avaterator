@@ -17,9 +17,9 @@ function svgGenerator(name, { shape, round, ...params }) {
   <svg height="${size}" width="${size}" xmlns="http://www.w3.org/2000/svg" viewBox="${viewBox}">
       ${
         shape === 'square'
-          ? `<rect width="${size}" height="${size}" x="0" y="0" rx="${round || 0.1 * size}" ry="${
-              round || 0.1 * size
-            }" fill="${colors.background}" />`
+          ? `<rect width="${size}" height="${size}" x="0" y="0" rx="${round ?? 0.1 * size}" ry="${
+              round ?? 0.1 * size
+            }" fill="${background || colors.background}" />`
           : `<circle r="${size / 2}" cx="${size / 2}" cy="${size / 2}" fill="${
               background || colors.background
             }" />`
