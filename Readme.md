@@ -1,6 +1,6 @@
-# Generate Avatar
+# Generator Avatar
 
-This is a simple api that generates an avatar image from a name.
+Simple api to generates an avatar image from a name.
 
 ## Usage
 
