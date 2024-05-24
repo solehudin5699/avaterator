@@ -1,4 +1,3 @@
-// @ts-nocheck
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -13,7 +12,8 @@ app.use(bodyParser.json());
 //GET AVATAR
 app.get('/', async (req, res) => {
   const { name, size, background, color, bold, shape, rounded } = req.query;
-  const response = svgGenerator(name, {
+  // @ts-ignore
+  const svgString = svgGenerator(name, {
     size,
     background,
     color,
@@ -24,7 +24,7 @@ app.get('/', async (req, res) => {
   try {
     res.setHeader('Pragma', 'public');
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
     res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
     res.setHeader('Access-Control-Max-Age', 1814400);
     res.setHeader(
@@ -33,7 +33,7 @@ app.get('/', async (req, res) => {
     );
     res.setHeader('Cache-Control', 'max-age=1814400');
     res.setHeader('content-type', 'image/svg+xml');
-    res.send(new Buffer.from(response));
+    res.send(Buffer.from(svgString));
   } catch (error) {
     res.setHeader('Content-type', 'application/json');
     res.status(500).send({ message: 'Internal server error' });
