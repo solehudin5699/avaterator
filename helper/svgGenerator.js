@@ -5,10 +5,10 @@ const { colorGenerator } = require('./colorGenerator');
 /***
  * @function svgGenerator
  * @param {string} name
- * @param {{size:number,background:string,color:string,bold:'normal'|'bold'|number,shape:'circle'|'square',round:number}} params
+ * @param {{size:number,background:string,color:string,bold:'normal'|'bold'|number,shape:'circle'|'square',rounded:number}} params
  * @returns string
  */
-function svgGenerator(name, { shape, round, ...params }) {
+function svgGenerator(name, { shape, rounded, ...params }) {
   const initialName = nameGenerator(name);
 
   const { size, viewBox, background, color, bold, fontSize } = svgProperty(params);
@@ -17,8 +17,8 @@ function svgGenerator(name, { shape, round, ...params }) {
   <svg height="${size}" width="${size}" xmlns="http://www.w3.org/2000/svg" viewBox="${viewBox}">
       ${
         shape === 'square'
-          ? `<rect width="${size}" height="${size}" x="0" y="0" rx="${round ?? 0.1 * size}" ry="${
-              round ?? 0.1 * size
+          ? `<rect width="${size}" height="${size}" x="0" y="0" rx="${rounded ?? 0.1 * size}" ry="${
+              rounded ?? 0.1 * size
             }" fill="${background || colors.background}" />`
           : `<circle r="${size / 2}" cx="${size / 2}" cy="${size / 2}" fill="${
               background || colors.background
