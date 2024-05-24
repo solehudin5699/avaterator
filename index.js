@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 //GET AVATAR
 app.get('/', async (req, res) => {
   const { name, size, background, color, bold, shape, rounded } = req.query;
-  const response = svgGenerator(`${name}`, {
+  const response = svgGenerator(name, {
     size,
     background,
     color,
