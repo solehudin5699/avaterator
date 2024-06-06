@@ -27,12 +27,16 @@ function svgProperty(params) {
 
   return {
     size: validSize,
-    background: validBackground,
-    color: validColor,
+    background: isHexColor(validBackground) ? `#${validBackground}` : `${validBackground}`,
+    color: isHexColor(validColor) ? `#${validColor}` : `${validColor}`,
     viewBox: `0 0 ${validSize} ${validSize}`,
     bold: validBold || 400,
     fontSize: 0.4 * validSize,
   };
 }
+
+const isHexColor = (color) => {
+  return new RegExp(/^#[0-9A-F]{3,6}$/i).test('#' + color);
+};
 
 module.exports = svgProperty;
