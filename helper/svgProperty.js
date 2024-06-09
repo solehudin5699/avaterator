@@ -27,8 +27,8 @@ function svgProperty(params) {
 
   return {
     size: validSize,
-    background: isHexColor(validBackground) ? `#${validBackground}` : `${validBackground}`,
-    color: isHexColor(validColor) ? `#${validColor}` : `${validColor}`,
+    background: isHexColor(validBackground) ? `#${validBackground}` : validBackground,
+    color: isHexColor(validColor) ? `#${validColor}` : validColor,
     viewBox: `0 0 ${validSize} ${validSize}`,
     bold: validBold || 400,
     fontSize: 0.4 * validSize,
